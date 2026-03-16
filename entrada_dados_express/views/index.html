@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="n1">
+    <input type="number" id="n2">
+    <input type="button" value="Enviar" onclick="JavaScript:calcule()">
+    <script>
+        var input1 = document.getElementById("n1");
+        var input2 = document.getElementById("n2");
+        function calcule() {
+            window.location.href = `http://127.0.0.1:3000/${input1.value}/${input2.value}`
+        }
+    </script>
+</body>
+</html>

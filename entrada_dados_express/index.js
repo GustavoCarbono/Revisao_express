@@ -1,33 +1,15 @@
 const express = require('express')
-
-const propriedade_router = require('./potenciacao/propriedades.js')
-
-const exercicio_router = require('./potenciacao/exercicio/exercicio.js')
-const exercicioEnem_router = require('./potenciacao/exercicioEnem/exercicioEnem.js')
-
+const path = require('path')
 const app = express()
 
 app.use(express.urlencoded({extended:true}))
+app.use(express.static('public'))
 
-app.use('/potenciacao', propriedade_router)
-app.use('/potenciacao', exercicio_router)
-app.use('/potenciacao', exercicioEnem_router)
-
-var exercicio = ''
-for(var i=1; i<11; i++) {
-    exercicio += `<p><a href="http://localhost:3000/potenciacao/exercicio/${i}">Exercício ${i}</a></p>`
-}
-
-var exercicio_vestibular = ''
-for(var i=1; i<6; i++) {
-    exercicio_vestibular += `<p><a href="http://localhost:3000/potenciacao/exercicioEnem/${i}">Exercício Vestibular ${i}</a></p>`
-}
-
-app.get("/", (req, res) => {
-    res.send('<a href="http://localhost:3000/potenciacao/propriedades">Propriedades</a>'
-        + exercicio + exercicio_vestibular
-    )
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views/index.html'));
 })
 
-
+app.get('/:n1/:n2', (req, res) => {
+    res.send(`<p>${req.params.n1*req.params.n2}</p>`+'<a href="http://127.0.0.1:3000">voltar</a>')
+})
 app.listen(3000, ()=>{console.log("operando na porta 3000")})
